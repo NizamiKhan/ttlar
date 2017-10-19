@@ -13,19 +13,23 @@
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'SiteController@show');
     Route::get('/category/{id}', 'CategoriesController@actionCategory');
-    Route::get('/add', ['middleware' => 'auth', 'uses' => 'AdminController@create']);
+//    Route::get('/add', ['middleware' => 'auth', 'uses' => 'Admin\AdminController@create']);
     Route::get('/news/{id}', 'NewsController@show');
-//    Route::auth();
 
-//    Route::get('/test/index', function (){
-//        return view('/default/index');
-//    });
 });
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
+Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function () {
+    Route::get('/add-post', ['uses' => 'Admin\AdminPostController@show','as'=>'admin_add_post']);
+    Route::post('/add-post', ['uses' => 'Admin\AdminPostController@create','as'=>'admin_add_post_p']);
+    Route::get('/test',function (){
+        return view('test') ;
+    });
+});
+Route::get('/main', function () {
+    return view('main');
+});
 Route::auth();
-
-Route::get('/home', 'HomeController@index');
+//
+//Route::get('/home', 'HomeController@index');
+Route::get('upload',['as' => 'upload_form', 'uses' => 'Admin\AdminPostController@getForm']);
+Route::post('upload',['as' => 'upload_file','uses' => 'Admin\AdminPostController@upload']);

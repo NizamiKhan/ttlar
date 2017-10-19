@@ -17,6 +17,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
+    <script src="{{ asset('/js/ckeditor/ckeditor.js') }}"
+            type="text/javascript" charset="utf-8" ></script>
 </head>
 
 <body>
@@ -32,7 +34,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="{{url('/')}}">Главная</a>
-                <a class="navbar-brand" href="{{url('/add')}}">Добавить новость</a>
+                <a class="navbar-brand" href="{{url('/admin/add-post')}}">Добавить новость</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <form class="navbar-form navbar-right">
@@ -83,6 +85,7 @@
     {{--@endforeach--}}
 
     <div class="row">
+
         <div class="col-md-3">
             @section('sidebar')
                 <div class="sidebar-module">
