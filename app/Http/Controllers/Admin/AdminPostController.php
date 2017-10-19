@@ -61,7 +61,7 @@ class AdminPostController extends Controller
             $imgName = time() . '_' . $f->getClientOriginalName();
             $f->move(public_path('images/news'), $imgName);
         }
-        $news->img = $imgName;
+        if (isset($imgName))$news->img = $imgName;
     }
 
     public function getForm()

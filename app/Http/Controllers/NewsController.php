@@ -16,10 +16,10 @@ class NewsController extends Controller
         $categories = Category::all();
         $newsById = News::find($id);
         $imgUrl = $newsById->img;
-        if ($imgUrl=="") {
+        $isFile = file_exists(public_path('images/news/' . $imgUrl));
+        if ($isFile == false || $imgUrl == "") {
             $imgUrl = 'default.jpg';
         }
-
         return view('/default/news', ['categories' => $categories, 'newsById' => $newsById, 'imgUrl' => $imgUrl]);
     }
 
