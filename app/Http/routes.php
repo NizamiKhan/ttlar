@@ -13,7 +13,8 @@
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'SiteController@show');
     Route::get('/category/{id}', 'CategoriesController@actionCategory');
-    Route::get('/add', ['middleware' => 'auth', 'uses' => 'AdminController@add']);
+    Route::get('/add', ['middleware' => 'auth', 'uses' => 'AdminController@create']);
+    Route::get('/news/{id}', 'NewsController@show');
 //    Route::auth();
 
 //    Route::get('/test/index', function (){

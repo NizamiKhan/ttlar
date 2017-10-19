@@ -32,16 +32,24 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="{{url('/')}}">Главная</a>
+                <a class="navbar-brand" href="{{url('/add')}}">Добавить новость</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <form class="navbar-form navbar-right">
-                    <div class="form-group">
-                        <input type="text" placeholder="Email" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" placeholder="Password" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-success">Sign in</button>
+                    {{--<div class="form-group">--}}
+                    {{--<input type="text" placeholder="Email" class="form-control">--}}
+                    {{--</div>--}}
+                    {{--<div class="form-group">--}}
+                    {{--<input type="password" placeholder="Password" class="form-control">--}}
+                    {{--</div>--}}
+                    {{--<button type="submit" class="btn btn-success">Sign in</button>--}}
+                    @if (Auth::guest())
+                        <p class="navbar-brand"> Привет, Гость <a href="{{url('login')}}"
+                                                                  class="btn btn-success">Войти</a>
+                    @else
+                        <p class="navbar-brand"> Привет, {{ Auth::user()->name }}</p>
+                        <a href="{{url('logout')}}" class="btn btn-danger">Выйти</a>
+                    @endif
                 </form>
             </div><!--/.navbar-collapse -->
         </div>
@@ -78,11 +86,10 @@
         <div class="col-md-3">
             @section('sidebar')
                 <div class="sidebar-module">
-
                     <h2>Каталог новостей</h2>
                     <ol class="list-unstyled">
                         @foreach($categories as $category)
-                            <li><a href="{{url('/category/'.$category->id)}}">{{$category->name}}</a></li>
+                            <li><a href="{{url('/category/'.$category->id)}}"><h4>{{$category->name}}</h4></a></li>
                         @endforeach
                     </ol>
                 </div>

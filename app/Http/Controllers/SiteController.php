@@ -18,6 +18,4 @@ class SiteController extends Controller
         $categories = Category::all();
         return view('/default/index', ['news' => $news, 'categories' => $categories]);
     }
-
-
 }
