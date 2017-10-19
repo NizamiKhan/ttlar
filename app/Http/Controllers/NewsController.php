@@ -15,7 +15,12 @@ class NewsController extends Controller
     {
         $categories = Category::all();
         $newsById = News::find($id);
-        return view('/default/news', ['categories' => $categories, 'newsById' => $newsById]);
+        $imgUrl = $newsById->img;
+        if ($imgUrl=="") {
+            $imgUrl = 'default.jpg';
+        }
+
+        return view('/default/news', ['categories' => $categories, 'newsById' => $newsById, 'imgUrl' => $imgUrl]);
     }
 
 }

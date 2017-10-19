@@ -37,23 +37,31 @@ class AdminPostController extends Controller
         $news->name = $data['name'];
         $text = strip_tags($data['text']);
         $news->text = $text;
+        $this->hasAnnouncement($data, $news, $text);
+        $news->category_id = Category::where('name', $data['select'])->first()->id;
+        $this->upload($request, $news);
+        $user->news()->save($news);
+
+        return redirect()->back()->with('message', 'Новость добавлена!');
+    }
+
+    public function hasAnnouncement($data, $news, $text)
+    {
         if (!$data['announcement'] == "") {
             $news->announcement = $data['announcement'];
         } else {
             $news->announcement = substr($text, 0, 100);
         }
-        $news->category_id = Category::where('name', $data['select'])->first()->id;
-        $this->upload($request);
-        $user->news()->save($news);
-        return redirect()->back()->with('message', 'Новость добавлена!');
     }
 
-    public function upload(Request $request)
+    public function upload(Request $request, News $news)
     {
         $file = $request->file();
         foreach ($file as $f) {
-            $f->move(storage_path('images'), time() . '_' . $f->getClientOriginalName());
+            $imgName = time() . '_' . $f->getClientOriginalName();
+            $f->move(public_path('images/news'), $imgName);
         }
+        $news->img = $imgName;
     }
 
     public function getForm()
