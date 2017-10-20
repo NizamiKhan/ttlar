@@ -13,7 +13,6 @@
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'SiteController@show');
     Route::get('/category/{id}', 'CategoriesController@actionCategory');
-//    Route::get('/add', ['middleware' => 'auth', 'uses' => 'Admin\AdminController@create']);
     Route::get('/news/{id}', 'NewsController@show');
 
 });
@@ -26,16 +25,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function ()
     Route::get('update-post/{id}', ['as' => 'admin_update_post_p', 'uses' => 'Admin\AdminUpdatePostController@showNew']);
     Route::get('archive/{id}', 'Admin\ArchiveController@show');
 });
-Route::get('/main', function () {
-    return view('main');
-});
+
 Route::auth();
-//
-//Route::get('/home', 'HomeController@index');
-//Route::get('upload', ['as' => 'upload_form', 'uses' => 'Admin\AdminPostController@getForm']);
-//Route::post('upload', ['as' => 'upload_file', 'uses' => 'Admin\AdminPostController@upload']);
-//
-//Route::get('paginate', function () {
-//    $users = DB::table('users')->paginate(15);
-//    return view('paginate',['users'=>$users]);
-//});

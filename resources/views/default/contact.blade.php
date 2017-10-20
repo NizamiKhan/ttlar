@@ -13,7 +13,6 @@
 
     @endif
 
-
     <form method="post" action="{{route('contact')}}">
         {{ csrf_field() }}
         Name:<br>

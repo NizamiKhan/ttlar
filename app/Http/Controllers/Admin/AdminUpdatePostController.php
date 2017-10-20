@@ -23,24 +23,18 @@ class AdminUpdatePostController extends Controller
     {
         $categories = Category::all();
         $user = Auth::user();
-//        orderBy('id', 'desc')->paginate(12);
         $newsById = $user->news()->orderBy('id', 'desc')->paginate(10);
-//        dump($news);
         return view('default.update_show', ['title' => 'Просмотр всех ваших новостей', 'categories' => $categories, 'newsById' => $newsById]);
     }
 
     public function showNew($id)
     {
-
         $categories = Category::all();
         $user = Auth::user();
         $newsById = News::find($id);
         $catName = $newsById->category->name;
-
         $archives = Archive::where('news_id', $id)->get();
-//        dump($archives);
-        return view('default.update-post', ['title' => 'Обновление новости', 'categories' => $categories, 'newsById' => $newsById, 'catName' => $catName,'archives'=>$archives]);
-//        return __METHOD__;
+        return view('default.update-post', ['title' => 'Обновление новости', 'categories' => $categories, 'newsById' => $newsById, 'catName' => $catName, 'archives' => $archives]);
     }
 
     public function create(Request $request)
@@ -67,23 +61,7 @@ class AdminUpdatePostController extends Controller
         $text = strip_tags($data['text']);
         $news->text = $text;
         $this->hasAnnouncement($data, $news, $text);
-
-
         $news->save();
-
-//        dump($data);
-
-
-//        dump($news);
-//        $news = new News();
-//        $news->name = $data['name'];
-//        $text = strip_tags($data['text']);
-//        $news->text = $text;
-//        $this->hasAnnouncement($data, $news, $text);
-//        $news->category_id = Category::where('name', $data['select'])->first()->id;
-//        $this->upload($request, $news);
-//        $user->news()->save($news);
-//
         return redirect()->back()->with('message', 'Новость обновлена!');
     }
 

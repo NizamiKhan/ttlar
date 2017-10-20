@@ -8,9 +8,6 @@
 @endsection
 @section('content')
     <div class="col-md-9">
-        {{--<div class="">--}}
-        {{--<h2></h2>--}}
-        {{--</div>--}}
         @if(count($errors)>0)
             <div class="alert-danger">
                 <ul>

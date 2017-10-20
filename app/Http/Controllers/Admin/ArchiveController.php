@@ -14,7 +14,6 @@ class ArchiveController extends Controller
     //
     public function show($id){
         $categories = Category::all();
-//        dump($id);
         $archive=Archive::find($id);
         return view('default.archive', ['title' => 'Архив', 'categories' => $categories,'archive'=>$archive]);
     }

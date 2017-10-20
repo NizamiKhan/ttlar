@@ -12,7 +12,6 @@
                 <h1>{{$newsById->name}}</h1>
             </div>
             <p>{{$newsById->text}}</p>
-
         </div>
         <img src="{{asset('images/news/'.$imgUrl)}}" alt="Изображение для новости">
     </div>

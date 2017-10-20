@@ -14,10 +14,3 @@
     <?php echo $news->render(); ?>
 
 </div>
-
-{{--@foreach($news as $new)--}}
-{{--<div class="panel panel-default">--}}
-{{--<h4>[{{$new->id}}] {{$new->name}}</h4><br>--}}
-{{--{{$new->announcement}}--}}
-{{--</div>--}}
-{{--@endforeach--}}

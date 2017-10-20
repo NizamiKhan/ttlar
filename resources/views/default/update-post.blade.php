@@ -10,7 +10,6 @@
     <h1>Новость № {{$newsById->id}}</h1>
     <div class="col-md-9">
     <div class="panel panel-default">
-        <!-- Default panel contents -->
 
         <div class="panel-heading"><h1>АРХИВ</h1></div>
         <table class="table">
@@ -38,9 +37,6 @@
         </table>
         </div>
         <div class="col-md-9">
-            {{--<div class="">--}}
-            {{--<h2></h2>--}}
-            {{--</div>--}}
             @if(count($errors)>0)
                 <div class="alert-danger">
                     <ul>

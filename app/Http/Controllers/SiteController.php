@@ -13,14 +13,9 @@ class SiteController extends Controller
 {
     public function show()
     {
-        //Список последних новостей
         $news = News::orderBy('id', 'desc')->paginate(12);
         //Список категорий
         $categories = Category::all();
-
-//        $news = News::find(1);
-//        $user = $news->user->name;
-//        dump($user);
         return view('/default/index', ['news' => $news, 'categories' => $categories]);
     }
 }

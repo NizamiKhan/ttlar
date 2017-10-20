@@ -16,6 +16,5 @@
             <p>Анонс: {{$archive->announcement}}</p>
 
         </div>
-{{--        <img src="{{asset('images/news/'.$imgUrl)}}" alt="Изображение для новости">--}}
     </div>
 @endsection
