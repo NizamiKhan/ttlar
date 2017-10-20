@@ -35,6 +35,7 @@
                 </button>
                 <a class="navbar-brand" href="{{url('/')}}">Главная</a>
                 <a class="navbar-brand" href="{{url('/admin/add-post')}}">Добавить новость</a>
+                <a class="navbar-brand" href="{{url('/admin/update-post')}}">Редактировать новость</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <form class="navbar-form navbar-right">

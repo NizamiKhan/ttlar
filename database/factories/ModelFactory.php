@@ -14,8 +14,8 @@
 $factory->define(\App\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->firstName,
-        'email'=>$faker->email
-//        'password' => $faker->password
+        'email'=>$faker->email,
+        'password' => $faker->password
     ];
 });
 
@@ -23,10 +23,10 @@ $factory->define(\App\News::class, function (Faker\Generator $faker) {
     $text = $faker->text(1000);
     return [
         'name' => rtrim($faker->text(15), '.'),
-        'announcement' => substr($text, 0, 50),
+        'announcement' => substr($text, 0, 100),
         'text' => $text,
         'img' => $faker->imageUrl(),
         'category_id' => $faker->numberBetween(1, 6),
-        'user_id' => $faker->numberBetween(1, 10)
+        'user_id' => $faker->numberBetween(1, 100)
     ];
 });

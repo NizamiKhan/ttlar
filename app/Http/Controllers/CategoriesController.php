@@ -15,7 +15,7 @@ class CategoriesController extends Controller
         $categories = Category::all();
         $category = Category::find($id);
 //        dump($category);
-        $news = $category->news()->orderBy('id', 'desc')->take(10)->get();
+        $news = $category->news()->orderBy('id', 'desc')->paginate(12);
 //        dump($news);
         return view('/default/category', ['news' => $news, 'categories' => $categories,'category'=>$category]);
     }
