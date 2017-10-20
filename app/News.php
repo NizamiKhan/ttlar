@@ -17,4 +17,9 @@ class News extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function archives()
+    {
+        return $this->hasMany('App\News');
+    }
 }

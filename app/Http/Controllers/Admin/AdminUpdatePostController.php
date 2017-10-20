@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Archive;
 use App\Category;
 use App\Http\Controllers\Controller;
 use App\News;
@@ -30,12 +31,15 @@ class AdminUpdatePostController extends Controller
 
     public function showNew($id)
     {
+
         $categories = Category::all();
         $user = Auth::user();
         $newsById = News::find($id);
         $catName = $newsById->category->name;
-//
-        return view('default.update-post', ['title' => 'Обновление новости', 'categories' => $categories, 'newsById' => $newsById, 'catName' => $catName]);
+
+        $archives = Archive::where('news_id', $id)->get();
+//        dump($archives);
+        return view('default.update-post', ['title' => 'Обновление новости', 'categories' => $categories, 'newsById' => $newsById, 'catName' => $catName,'archives'=>$archives]);
 //        return __METHOD__;
     }
 
@@ -48,16 +52,26 @@ class AdminUpdatePostController extends Controller
 
         $user = Auth::user();
         $data = $request->all();
-        $news=News::find($data['id']);
+        $news = News::find($data['id']);
+
+        $archive = new Archive();
+        $archive->name = $news->name;
+        $archive->text = $news->text;
+        $archive->announcement = $news->announcement;
+        $archive->category_id = $news->category_id;
+        $archive->news_id = $news->id;
+        $archive->save();
 
         $news->name = $data['name'];
         $news->category_id = Category::where('name', $data['select'])->first()->id;
         $text = strip_tags($data['text']);
         $news->text = $text;
         $this->hasAnnouncement($data, $news, $text);
-        $news->save();
-        dump($data);
 
+
+        $news->save();
+
+//        dump($data);
 
 
 //        dump($news);
@@ -72,6 +86,7 @@ class AdminUpdatePostController extends Controller
 //
         return redirect()->back()->with('message', 'Новость обновлена!');
     }
+
     public function hasAnnouncement($data, $news, $text)
     {
         if (!$data['announcement'] == "") {

@@ -24,9 +24,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function ()
     Route::get('update-post', ['as' => 'admin_update_post', 'uses' => 'Admin\AdminUpdatePostController@show']);
     Route::post('update-post', ['as' => 'admin_update_post_news', 'uses' => 'Admin\AdminUpdatePostController@create']);
     Route::get('update-post/{id}', ['as' => 'admin_update_post_p', 'uses' => 'Admin\AdminUpdatePostController@showNew']);
-    Route::get('/test', function () {
-        return view('test');
-    });
+    Route::get('archive/{id}', 'Admin\ArchiveController@show');
 });
 Route::get('/main', function () {
     return view('main');
