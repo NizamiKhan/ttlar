@@ -33,7 +33,7 @@
                         <td>{{$news->name}}</td>
                         <td>{{$news->announcement}}</td>
                         <td>{{$news->created_at}}</td>
-                        <td>{{$news->update_at}}</td>
+                        <td>{{$news->updated_at}}</td>
                         <td><a href="{{url('admin/update-post/'.$news->id)}}">Редактировать</a></td>
                     </tr>
                 @endforeach

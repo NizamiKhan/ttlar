@@ -33,13 +33,51 @@ class AdminUpdatePostController extends Controller
         $categories = Category::all();
         $user = Auth::user();
         $newsById = News::find($id);
-        dump($newsById);
-//        return view('default.update-post', ['title' => 'Обновление новости', 'categories' => $categories,'newsById'=>$newsById]]);
+        $catName = $newsById->category->name;
+//
+        return view('default.update-post', ['title' => 'Обновление новости', 'categories' => $categories, 'newsById' => $newsById, 'catName' => $catName]);
 //        return __METHOD__;
     }
 
-    public function create($id)
+    public function create(Request $request)
     {
-        return __METHOD__;
+        $this->validate($request, [
+            'name' => 'required|min:3',
+            'text' => 'required'
+        ]);
+
+        $user = Auth::user();
+        $data = $request->all();
+        $news=News::find($data['id']);
+
+        $news->name = $data['name'];
+        $news->category_id = Category::where('name', $data['select'])->first()->id;
+        $text = strip_tags($data['text']);
+        $news->text = $text;
+        $this->hasAnnouncement($data, $news, $text);
+        $news->save();
+        dump($data);
+
+
+
+//        dump($news);
+//        $news = new News();
+//        $news->name = $data['name'];
+//        $text = strip_tags($data['text']);
+//        $news->text = $text;
+//        $this->hasAnnouncement($data, $news, $text);
+//        $news->category_id = Category::where('name', $data['select'])->first()->id;
+//        $this->upload($request, $news);
+//        $user->news()->save($news);
+//
+        return redirect()->back()->with('message', 'Новость обновлена!');
+    }
+    public function hasAnnouncement($data, $news, $text)
+    {
+        if (!$data['announcement'] == "") {
+            $news->announcement = $data['announcement'];
+        } else {
+            $news->announcement = substr($text, 0, 100);
+        }
     }
 }
